@@ -1,0 +1,20 @@
+@use '/src/scss/variables' as *;
+
+.game {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    height: calc(100vh - $menu-height);
+    background: transparent;
+    border: 5px solid black;
+
+    @media (min-width: $breakpoint-large) {
+        flex-direction: row;
+    }
+
+    &__column {
+        width: auto;
+    }
+}

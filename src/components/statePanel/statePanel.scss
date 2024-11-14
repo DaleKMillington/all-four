@@ -1,0 +1,22 @@
+.state-panel {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 400px;      
+    border: 1px solid black;
+    height: 250px;
+    padding: 10px 20px;
+
+    &__header {
+        margin: 20px auto 40px auto;
+    }
+
+    &__turn {
+        margin: 0 auto 40px auto;
+        font-size: 22px;
+    }
+
+    &__button {
+        height: 50px; // Placeholder for button components
+    }
+}
