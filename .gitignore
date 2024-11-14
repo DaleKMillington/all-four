@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files
+.env
+
+# Vite build cache
+.vite/
+
+# IDEs and editors
+.idea/
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
