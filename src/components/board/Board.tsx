@@ -14,12 +14,12 @@ export const Board = () => {
         <div className="board">
             <div className="board__drop-zone">
                 {dropCells.map((_, index) => (
-                    <Cell key={index} color="blue"/>
+                    <Cell key={index} color="#FF6F61"/>
                 ))}                
             </div>
             <div className="board__game-space">
                 {cells.map((_, index) => (
-                    <Cell key={index} color="purple"/>
+                    <Cell key={index} color="#FFD966"/>
                 ))}
             </div>
         </div>
