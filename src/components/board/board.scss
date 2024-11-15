@@ -1,8 +1,10 @@
 @use '/src/scss/variables' as *;
+@use '/src/scss/mixins' as *;
 
 .board {
     width: 90vw;           
-    max-width: 450px; 
+    max-width: 450px;
+    max-height: 60vh;
     margin: 0 auto;
 
     @media(min-width: $breakpoint-medium){
@@ -28,13 +30,14 @@
     }
 
     &__game-space {
+        @include drop-shadow;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: repeat(7, 1fr);
         gap: 5px;
         aspect-ratio: 7 / 7;
         background: $board-color;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 10px;
     }
 }

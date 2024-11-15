@@ -1,9 +1,0 @@
-@use '/src/scss/variables' as *;
-
-.page-container {
-    position: relative;
-    height: calc(100vh - $menu-height);
-    width: 100%;
-    background: $secondary-color;
-    border: none;
-}
