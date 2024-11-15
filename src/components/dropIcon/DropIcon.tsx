@@ -1,15 +1,18 @@
+// Project
+import { GameAction, actions } from '../../state/gameState/GameState';
+import { dropIconColors, DropIconColorsType } from '../../constants/dropIconColors.const';
+
 // Local
 import './dropIcon.scss';
-import { dropIconColors, DropIconColorsType } from '../../constants/dropIconColors.const';
 
 // Types
 type DropIconProps = {
     color: DropIconColorsType;
+    index: number;
+    dispatch: React.Dispatch<GameAction>;
 }   
 
 // Declarations
-const animatedModifierClass = "drop-icon--animated";
-
 const determineDropIconModifierClass = (color: DropIconColorsType): string => {
     switch(color){
         case dropIconColors.clear: return "drop-icon--clear";
@@ -19,10 +22,22 @@ const determineDropIconModifierClass = (color: DropIconColorsType): string => {
 };
 
 // Component
-export const DropIcon = ({ color }: DropIconProps) => {
+export const DropIcon = ({ color, index, dispatch }: DropIconProps) => {
     const dropIconModifierClass = determineDropIconModifierClass(color);
+    const onclickHandler = () => {
+        if (color !== dropIconColors.clear) {
+            dispatch({
+                type: actions.DROP_CELL,
+                payload: {colIndex: index}
+            });
+        }
+    };
+
     return (
-        <div className={`drop-icon ${dropIconModifierClass}`}>
+        <div 
+            className={`drop-icon ${dropIconModifierClass}`}
+            onClick={ onclickHandler }
+        >
 
         </div>
     );

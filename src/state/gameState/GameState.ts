@@ -1,7 +1,7 @@
 // Project
 import { cellColors, CellColorsType } from "../../constants/cellColors.const";
 import { currentPlayer, CurrentPlayerType } from "../../constants/currentPlayer.const";
-import { currentPlayerColor, CurrentPlayerColorType } from "../../constants/currentPlayerColor.const ";
+import { currentPlayerColor, CurrentPlayerColorType } from "../../constants/currentPlayerColor.const";
 import { handleDropCell } from "./handleDropCell";
 
 // Actions
@@ -18,7 +18,7 @@ export type GameState = {
     gameOver: boolean; 
 };
 
-type DropCellAction = {
+export type DropCellAction = {
     type: typeof actions.DROP_CELL;
     payload: { colIndex: number };
 };
