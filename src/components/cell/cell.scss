@@ -1,17 +1,22 @@
 @use '/src/scss/variables' as *;
 
+@mixin color-modifier($color, $amount) {
+    background-color: $color;
+    border: 4px solid darken($color, $amount);
+}
+
 .cell {
     border-radius: 50%;
 
     &--clear {
-        background-color: $background-color;
+        @include color-modifier($background-color, 0)
     }
 
     &--red {
-        background-color: $red-coin-color;
+        @include color-modifier($red-coin-color, 10)
     }
 
     &--yellow {
-        background-color: $yellow-coin-color;
+        @include color-modifier($yellow-coin-color, 20)
     }
 }
