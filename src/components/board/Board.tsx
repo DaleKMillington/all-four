@@ -1,6 +1,9 @@
 // Local
 import './board.scss';
 import { Cell } from '../cell/Cell';
+import { cellColors } from '../cell/cellColors.const';
+import { DropIcon } from '../dropIcon/DropIcon';
+import { dropIconColors } from '../dropIcon/dropIconColors.const';
 
 // Component
 export const Board = () => {
@@ -14,12 +17,12 @@ export const Board = () => {
         <div className="board">
             <div className="board__drop-zone">
                 {dropCells.map((_, index) => (
-                    <Cell key={index} color="#FF6F61"/>
+                    <DropIcon key={index} color={dropIconColors.yellow} />
                 ))}                
             </div>
             <div className="board__game-space">
                 {cells.map((_, index) => (
-                    <Cell key={index} color="#FFD966"/>
+                    <Cell key={index} color={cellColors.red} />
                 ))}
             </div>
         </div>
