@@ -33,9 +33,9 @@
         @include drop-shadow;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr);
         gap: 10px;
-        aspect-ratio: 7 / 7;
+        aspect-ratio: 7 / 6;
         background: $board-color;
         border-radius: 12px;
         padding: 10px;

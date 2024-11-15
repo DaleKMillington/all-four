@@ -1,17 +1,28 @@
 // Local
 import './board.scss';
 import { Cell } from '../cell/Cell';
-import { cellColors } from '../cell/cellColors.const';
+import { cellColors } from '../../constants/cellColors.const';
 import { DropIcon } from '../dropIcon/DropIcon';
-import { dropIconColors } from '../dropIcon/dropIconColors.const';
+import { dropIconColors } from '../../constants/dropIconColors.const';
+import { GameState, GameAction } from '../../state/gameState/GameState';
+
+// Types
+type BoardProps = {
+    gameState: GameState;
+    dispatch: React.Dispatch<GameAction>;
+};
 
 // Component
-export const Board = () => {
-    const rows = 7;
+export const Board = ({
+    gameState: {
+        cells
+    },
+    dispatch
+}: BoardProps) => {
     const columns = 7;
-
     const dropCells = Array.from({ length: columns });
-    const cells = Array.from({ length: rows * columns });
+
+    console.log({cells});
 
     return (
         <div className="board">
@@ -21,8 +32,10 @@ export const Board = () => {
                 ))}                
             </div>
             <div className="board__game-space">
-                {cells.map((_, index) => (
-                    <Cell key={index} color={cellColors.red} />
+                {cells.map((row, rowIndex) => (
+                    row.map((cell, colIndex) => (
+                        <Cell key={`${rowIndex}-${colIndex}`} color={cell} />
+                    ))
                 ))}
             </div>
         </div>

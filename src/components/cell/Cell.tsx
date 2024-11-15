@@ -1,6 +1,6 @@
 // Local
 import './cell.scss';
-import { cellColors, CellColorsType } from './cellColors.const';
+import { cellColors, CellColorsType } from '../../constants/cellColors.const';
 
 // Types
 type CellProps = {

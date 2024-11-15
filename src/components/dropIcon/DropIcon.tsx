@@ -1,6 +1,6 @@
 // Local
 import './dropIcon.scss';
-import { dropIconColors, DropIconColorsType } from './dropIconColors.const';
+import { dropIconColors, DropIconColorsType } from '../../constants/dropIconColors.const';
 
 // Types
 type DropIconProps = {
