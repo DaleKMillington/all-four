@@ -1,5 +1,5 @@
 // Project
-import { Menu } from "./components/menu/Menu";
+import { StatPanel } from "./components/statPanel/StatPanel";
 import { Game } from "./game/Game";
 import { GameProvider } from "./game/GameContext";
 
@@ -7,7 +7,7 @@ import { GameProvider } from "./game/GameContext";
 export const App = () => {
   return (
     <GameProvider>
-        <Menu />
+        <StatPanel />
         <Game /> 
     </GameProvider>
   );
