@@ -1,7 +1,7 @@
 // Project
-import { cellColors, CellColorsType } from "../../constants/cellColors.const";
-import { currentPlayer, CurrentPlayerType } from "../../constants/currentPlayer.const";
-import { currentPlayerColor, CurrentPlayerColorType } from "../../constants/currentPlayerColor.const";
+import { cellColors, CellColorsType } from "../../../constants/cellColors.const";
+import { currentPlayer, CurrentPlayerType } from "../../../constants/currentPlayer.const";
+import { currentPlayerColor, CurrentPlayerColorType } from "../../../constants/currentPlayerColor.const";
 import { handleDropCell } from "./handleDropCell";
 
 // Actions
@@ -12,10 +12,11 @@ export const actions = {
 
 // Types
 export type GameState = {
-    cells: CellColorsType[][];
-    currentPlayer: CurrentPlayerType;
-    currentPlayerColor: CurrentPlayerColorType;
-    gameOver: boolean; 
+    cells: CellColorsType[][]; // The board state of cells
+    currentPlayer: CurrentPlayerType; // Human or AI
+    currentPlayerColor: CurrentPlayerColorType; // The color of the current player
+    firstPlayer: boolean; // Whether this player starts the game
+    gameOver: boolean;  // Has the game ended
 };
 
 export type DropCellAction = {
@@ -43,6 +44,7 @@ export const initialState = {
     cells: emptyBoard,
     currentPlayer: currentPlayer.human,
     currentPlayerColor: currentPlayerColor.red,
+    firstPlayer: true,
     gameOver: false,
 };
 

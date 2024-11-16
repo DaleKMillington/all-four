@@ -7,7 +7,7 @@ import {
     CurrentPlayerColorType 
 } from '../../constants/currentPlayerColor.const';
 import { cellColors, CellColorsType } from '../../constants/cellColors.const';
-import { GameState, GameAction } from '../../state/gameState/GameState';
+import { GameState, GameAction } from '../../game/state/gameState/GameState';
 
 // Local
 import './board.scss';

@@ -1,5 +1,5 @@
 // Project
-import { GameAction, actions } from '../../state/gameState/GameState';
+import { GameAction, actions } from '../../game/state/gameState/GameState';
 import { dropIconColors, DropIconColorsType } from '../../constants/dropIconColors.const';
 
 // Local

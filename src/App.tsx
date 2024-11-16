@@ -1,12 +1,12 @@
 // Project
 import { Menu } from "./components/menu/Menu";
-import { Game } from "./pages/Game";
+import { Game } from "./game/Game";
 
 // Component
 export const App = () => {
   return (
     <>
-    <Menu />
+        <Menu />
         <Game /> 
     </>
   );

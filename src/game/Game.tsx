@@ -2,7 +2,7 @@
 import { useReducer } from 'react';
 
 // Project
-import { gameReducer, initialState } from "../state/gameState/GameState";
+import { gameReducer, initialState } from "./state/gameState/GameState";
 
 // Local
 import './game.scss';
