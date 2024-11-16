@@ -14,7 +14,7 @@ export const handleDropCell = (state: GameState, action: DropCellAction) => {
     const updatedCells = determineUpdatedCells(state, action);
 
     // 2. Has this move won OR is the board full?
-    const updatedGameOver = determineUpdatedGameOver(state, updatedCells);
+    const updatedGameOver = determineUpdatedGameOver(updatedCells);
     if (updatedGameOver !== gameOverConst.inProgress){
         return {
             ...state,

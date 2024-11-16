@@ -1,18 +1,27 @@
 // Project
 import { GameState } from "../state/gameState/GameState";
 import { CellColorsType } from "../../constants/cellColors.const";
-
-// Local
-import { determineWin } from "./determineWin";
 import { gameOver, GameOverType } from "../../constants/gameOver.const";
 
+// Local
+import { determineIsWin } from "./determineIsWin";
+import { determineIsBoardFull } from "./determineIsBoardFull";
+
 // Declarations
-export const determineUpdatedGameOver = (state: GameState, updatedCells: CellColorsType[][]): GameOverType => {
+export const determineUpdatedGameOver = (updatedCells: CellColorsType[][]): GameOverType => {
 
     // 1. Has a 4-in-a-row connection been made?
-    const win = determineWin(updatedCells);
+    const isWin = determineIsWin(updatedCells);
+    if (isWin){
+        return gameOver.won;
+    }
     
+    // 2. Is the board full?
+    const isBoardFull = determineIsBoardFull(updatedCells);
+    if (isBoardFull){
+        return gameOver.draw;
+    }
 
-
+    // 3. Else we can continue.
     return gameOver.inProgress;
 };

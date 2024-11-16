@@ -107,6 +107,13 @@ export const StatPanel = () => {
     const isGameWon = gameOver === gameOverConst.won;
     const isGameDraw = gameOver === gameOverConst.draw;
 
+    console.log(`STAT PANEL GAME OVER: ${gameOver}`);
+    console.log({
+        isGameInProgress,
+        isGameWon,
+        isGameDraw
+    });
+
     return (
         <div className='stat-panel'>
             { isGameInProgress && <GameInProgress /> }

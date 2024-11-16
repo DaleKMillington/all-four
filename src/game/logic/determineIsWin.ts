@@ -100,21 +100,23 @@ const checkDiagonalTypeTwoWin = (updatedCells: CellColorsType[][]): boolean => {
     return false;
 };
 
-export const determineWin = (updatedCells: CellColorsType[][]): boolean => {
+export const determineIsWin = (updatedCells: CellColorsType[][]): boolean => {
     // NOTE: I am writing these checks with the assumption that they will be triggered each move.
     // Therefore to keep the complexity down we dont have to check for the specific player color.
+
+    // Have added && conditions to short circuit and improve performance.
 
     // 1. Check rows for a win
     const isRowWin = checkRowsForWin(updatedCells);
 
     // 2. Check columns for win
-    const isColumnWin = checkColumnsForWin(updatedCells);
+    const isColumnWin = !isRowWin && checkColumnsForWin(updatedCells);
 
     // 3. Check bottom-left to top-right diagonals for win
-    const isDiagonalTypeOneWin = checkDiagonalTypeOneWin(updatedCells);
+    const isDiagonalTypeOneWin = !isColumnWin && checkDiagonalTypeOneWin(updatedCells);
 
     // 4. Check top-left to bottom-right diagonals for win
-    const isDiagonalTypeTwoWin = checkDiagonalTypeTwoWin(updatedCells);
+    const isDiagonalTypeTwoWin = !isDiagonalTypeOneWin && checkDiagonalTypeTwoWin(updatedCells);
 
     console.log({
         isRowWin,
