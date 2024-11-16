@@ -118,12 +118,5 @@ export const determineIsWin = (updatedCells: CellColorsType[][]): boolean => {
     // 4. Check top-left to bottom-right diagonals for win
     const isDiagonalTypeTwoWin = !isDiagonalTypeOneWin && checkDiagonalTypeTwoWin(updatedCells);
 
-    console.log({
-        isRowWin,
-        isColumnWin,
-        isDiagonalTypeOneWin,
-        isDiagonalTypeTwoWin
-    });
-
     return isRowWin || isColumnWin || isDiagonalTypeOneWin || isDiagonalTypeTwoWin;
 };

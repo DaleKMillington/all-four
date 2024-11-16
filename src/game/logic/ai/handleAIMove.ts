@@ -4,6 +4,9 @@ import { Dispatch } from 'react';
 // Project
 import { GameContextValueType } from "../../GameContext";
 import { actions, GameAction } from "../../state/gameState/GameState";
+
+// Local
+import { checkForWinningMove } from './checkForWinningMove';
 import { determineClosestToCenterPosition } from "./determineClosestToCenterPosition";
 
 // Types
@@ -27,7 +30,6 @@ const constructHandleMakeMoveWithDelay = (dispatch: Dispatch<GameAction>) => (co
 export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     // I am going to design this AI to follow a set of heuristics based on priority.
     // Due to time constraints this is not going to be super intelligent.
-
     // 1. If there is a winning move - take it! 
     // 2. If there is a move that would block a winning move - take it!
     // 3. If there is a move that gurantees 2 possible winning moves in the next turn - take it!
@@ -39,7 +41,11 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     // Higher order to bind dispatch and can be passed to each heuristic function.
     const handleMakeMoveWithDelay = constructHandleMakeMoveWithDelay(dispatch);
 
-
+    // 1. If there is a winning move then take it.
+    const winningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay);
+    if (winningMove) {
+        return;
+    }
 
     // 7. Favour closest to center as possible.
     determineClosestToCenterPosition(gameState, handleMakeMoveWithDelay); 

@@ -1,9 +1,9 @@
 // Project
 import { GameState } from "../../state/gameState/GameState";
-import { cellColors } from "../../../constants/cellColors.const";
 
 // Local
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";
+import { determineAvailableColumns } from "./determineAvailableColumns";
 
 // Types
 type DistancesType = {
@@ -12,12 +12,6 @@ type DistancesType = {
 };
 
 // Declarations
-const determineAvailableColumns = (gameState: GameState): number[] => {
-    return gameState.cells[0]
-        .map((cell, colIndex) => (cell === cellColors.clear ? colIndex : -1))
-        .filter(colIndex => colIndex !== -1);
-};
-
 const determineDistances = (availableColumns: number[]): DistancesType[] => availableColumns.map(colIndex => {
     const centerColumn = 3;
     return {
