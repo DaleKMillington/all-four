@@ -5,6 +5,8 @@ import { GameState } from "../../state/gameState/GameState";
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";
 import { determineAvailableColumns } from "./determineAvailableColumns";
 import { simulateDropCell } from "./simulateDropCell";
+import { determineColorToDrop } from "./determineColorToDrop";
+import { determineHasTwoWinningMoves } from "./determineHasTwoWinningMoves";
 
 // Declarations
 export const checkForDoubleWinSetup = (
@@ -13,17 +15,17 @@ export const checkForDoubleWinSetup = (
     dropOpponentPiece: boolean
 ): boolean => {
 
-    // 1. Find the available columns
-    const availableColumns = determineAvailableColumns(gameState);
+    // 1. Determine the color to simulate dropping
+    const colorToDrop = determineColorToDrop(gameState, dropOpponentPiece);
 
-    // 2. Determine the color to simulate
-    const opponentColor = gameState.currentPlayer === cellColors.red ? cellColors.yellow : cellColors.red;
+    // 2. Find the available columns
+    const availableColumns = determineAvailableColumns(gameState.cells);
 
-    
+    // 3. Iterate over available columns and simulate making a move then check for a double win setup.
     for (const colIndex of availableColumns) {
-        const simulatedGameState = simulateDropCell(gameState, colIndex, dropOpponentPiece);
-
-        if (hasTwoWinningMoves(simulatedGameState, opponentColor)) {
+        const simulatedCells = simulateDropCell(gameState.cells, colIndex, colorToDrop);
+        const hasTwoWinningMoves = determineHasTwoWinningMoves(simulatedCells, colorToDrop);
+        if (hasTwoWinningMoves) {
             handleMakeMoveWithDelay(colIndex);
             return true; // Block this setup
         }

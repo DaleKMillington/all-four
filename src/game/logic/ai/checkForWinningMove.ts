@@ -19,11 +19,11 @@ export const checkForWinningMove = (
     const colorToDrop = determineColorToDrop(gameState, dropOpponentPiece);
 
     // 2. Find the available columns
-    const availableColumns = determineAvailableColumns(gameState);
+    const availableColumns = determineAvailableColumns(gameState.cells);
 
     // 3. Iterate over available columns and simulate making a move then check for a win.
     for (const colIndex of availableColumns) {
-        const simulatedCells = simulateDropCell(gameState, colIndex, colorToDrop);
+        const simulatedCells = simulateDropCell(gameState.cells, colIndex, colorToDrop);
         const isSimulationAWin = determineIsWin(simulatedCells, colorToDrop);
         if (isSimulationAWin) {
             handleMakeMoveWithDelay(colIndex);

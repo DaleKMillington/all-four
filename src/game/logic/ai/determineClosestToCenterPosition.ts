@@ -36,7 +36,7 @@ export const determineClosestToCenterPosition = (
 ) => {
 
     // 1. Find the available columns
-    const availableColumns = determineAvailableColumns(gameState);
+    const availableColumns = determineAvailableColumns(gameState.cells);
 
     // 2. Calculate distances to the center and group equal distance columns so I can chose one at random.
     const distances = determineDistances(availableColumns);

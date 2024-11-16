@@ -7,6 +7,7 @@ import { actions, GameAction } from "../../state/gameState/GameState";
 
 // Local
 import { checkForWinningMove } from './checkForWinningMove';
+import { checkForDoubleWinSetup } from './checkForDoubleWinSetup';
 import { determineClosestToCenterPosition } from "./determineClosestToCenterPosition";
 
 // Types
@@ -50,6 +51,12 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     // 2. If there is a move that blocks a winning move then take it.
     const blockWinningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay, true);
     if (blockWinningMove) {
+        return;
+    }
+
+    // 4. If there is a move that gives the opponent two winning moves in the subsequent turn then block it.
+    const blockDoubleWinSetup = checkForDoubleWinSetup(gameState, handleMakeMoveWithDelay, true);
+    if (blockDoubleWinSetup) {
         return;
     }
 
