@@ -19,6 +19,7 @@
 }
 
 .stat-panel {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,9 +29,29 @@
     background: $board-color;
     border: none;
     border-radius: 12px 12px 0 0;
-    padding: 0 20px;
+    padding: 0 150px;
     color: $background-color;
     font-weight: bold;
+
+    &__restart {
+        position: absolute;
+        text-transform: uppercase;
+        padding: 15px;
+        border-radius: 12px;
+        border: 3px solid transparent;
+        right: 20px;
+        color: $background-color;
+        background: transparent;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        z-index: 2;
+
+        &:hover {
+            cursor: pointer;
+            border-color: $background-color;
+        }
+    }
 }
 
 .in-progress {

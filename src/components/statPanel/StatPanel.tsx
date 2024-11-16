@@ -1,4 +1,5 @@
 // Project
+import { actions } from '../../game/state/gameState/GameState';
 import { useGameContext } from '../../game/GameContext';
 import { 
     currentPlayerColor as currentPlayerColorConst,
@@ -100,22 +101,24 @@ const GameDraw = () => {
 };
 
 export const StatPanel = () => {
-    const { gameState } = useGameContext();
-    const { gameOver } = gameState;
+    const { gameState, dispatch } = useGameContext();
+    const { currentPlayer, gameOver } = gameState;
+
+    const isPlayerAI = currentPlayer === currentPlayerConst.ai;
 
     const isGameInProgress = gameOver === gameOverConst.inProgress;
     const isGameWon = gameOver === gameOverConst.won;
     const isGameDraw = gameOver === gameOverConst.draw;
 
-    console.log(`STAT PANEL GAME OVER: ${gameOver}`);
-    console.log({
-        isGameInProgress,
-        isGameWon,
-        isGameDraw
-    });
+    const restartOnClick = () => dispatch({ type: actions.RESET_GAME });
 
     return (
         <div className='stat-panel'>
+            { !isPlayerAI && (
+                <button className="stat-panel__restart" onClick={ restartOnClick }>
+                    Restart
+                </button>
+            ) }
             { isGameInProgress && <GameInProgress /> }
             { isGameWon && <GameWon /> }
             { isGameDraw && <GameDraw /> }

@@ -18,8 +18,8 @@ export const handleDropCell = (state: GameState, action: DropCellAction) => {
     if (updatedGameOver !== gameOverConst.inProgress){
         return {
             ...state,
-            updatedCells,
-            updatedGameOver
+            cells: updatedCells,
+            gameOver: updatedGameOver
         }
     }
 
