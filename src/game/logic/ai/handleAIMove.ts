@@ -54,6 +54,12 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
         return;
     }
 
+    // 3. If there is a move that gives two winning moves in the subsequent turn then take it.
+    const doubleWinSetup = checkForDoubleWinSetup(gameState, handleMakeMoveWithDelay, false);
+    if (doubleWinSetup) {
+        return;
+    }
+
     // 4. If there is a move that gives the opponent two winning moves in the subsequent turn then block it.
     const blockDoubleWinSetup = checkForDoubleWinSetup(gameState, handleMakeMoveWithDelay, true);
     if (blockDoubleWinSetup) {
