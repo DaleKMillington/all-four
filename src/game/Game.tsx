@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { Board } from '../components/board/Board';
 import { currentPlayer as currentPlayerConst } from '../constants/currentPlayer.const';
 import { gameOver as gameOverConst } from '../constants/gameOver.const';
-import { handleAIMove } from './logic/handleAIMove';
+import { handleAIMove } from './logic/ai/handleAIMove';
 
 // Local
 import './game.scss';
