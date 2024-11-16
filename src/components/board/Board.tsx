@@ -12,6 +12,11 @@ import { useGameContext } from '../../game/GameContext';
 // Local
 import './board.scss';
 
+// Types
+type BoardProps = {
+    isAIPlayer: boolean;
+};
+
 // Declarations
 const determinePlayerDropIconColor = (currentPlayerColor: CurrentPlayerColorType): DropIconColorsType => {
     switch(currentPlayerColor){
@@ -23,17 +28,18 @@ const determinePlayerDropIconColor = (currentPlayerColor: CurrentPlayerColorType
 
 const determineDropIconColors = (
     cells: CellColorsType[][],
-    playerDropIconColor: DropIconColorsType
+    playerDropIconColor: DropIconColorsType,
+    isAIPlayer: boolean
 ): DropIconColorsType[] => cells[0].map(
-    column => column === cellColors.clear ? playerDropIconColor : dropIconColors.clear
+    column => column === cellColors.clear && !isAIPlayer ? playerDropIconColor : dropIconColors.clear
 );
 
 // Component
-export const Board = () => {
+export const Board = ({ isAIPlayer }: BoardProps) => {
     const { gameState } = useGameContext();
 
     const playerDropIconColor = determinePlayerDropIconColor(gameState.currentPlayerColor);
-    const dropIconColors = determineDropIconColors(gameState.cells, playerDropIconColor);
+    const dropIconColors = determineDropIconColors(gameState.cells, playerDropIconColor, isAIPlayer);
 
     return (
         <div className="board">

@@ -1,6 +1,6 @@
 export const currentPlayer = {
-    human: 0,
-    ai: 1
+    human: "HUMAN",
+    ai: "AI"
 } as const;
 
 export type CurrentPlayerType = (typeof currentPlayer)[keyof typeof currentPlayer];

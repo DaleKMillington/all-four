@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer, ReactNode, Dispatch } from 'reac
 import { gameReducer, initialState, GameState, GameAction } from './state/gameState/GameState';
 
 // Types
-type GameContextValue = {
+export type GameContextValueType = {
     gameState: GameState;
     dispatch: Dispatch<GameAction>;
 }
@@ -13,7 +13,7 @@ type GameProviderProps = {
 }
 
 // Context
-const GameContext = createContext<GameContextValue | undefined>(undefined);
+const GameContext = createContext<GameContextValueType | undefined>(undefined);
 
 // Hook
 export const useGameContext = () => {

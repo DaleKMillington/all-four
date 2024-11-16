@@ -1,6 +1,6 @@
 export const currentPlayerColor = {
-    red: 0,
-    yellow: 1
+    red: "RED",
+    yellow: "YELLOW"
 } as const;
 
 export type CurrentPlayerColorType = (typeof currentPlayerColor)[keyof typeof currentPlayerColor];
