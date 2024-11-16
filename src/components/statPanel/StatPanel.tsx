@@ -111,7 +111,7 @@ export const StatPanel = () => {
         <div className='stat-panel'>
             { isGameInProgress && <GameInProgress /> }
             { isGameWon && <GameWon /> }
-
+            { isGameDraw && <GameDraw /> }
         </div>
     );
 };

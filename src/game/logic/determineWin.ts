@@ -32,9 +32,9 @@ const checkColumnsForWin = (updatedCells: CellColorsType[][]): boolean => {
     for (let col = 0; col < updatedCells[0].length; col++) {
         for (let row = 0; row < updatedCells.length - 3; row++) {
             const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row][col + 1];
-            const position3 = updatedCells[row][col + 2];
-            const position4 = updatedCells[row][col + 3];
+            const position2 = updatedCells[row + 1][col];
+            const position3 = updatedCells[row + 2][col];
+            const position4 = updatedCells[row + 3][col];
 
             const isNotClear = position1 !== cellColors.clear;
             const position2Match = position1 === position2;
