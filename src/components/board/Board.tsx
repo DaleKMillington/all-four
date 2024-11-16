@@ -7,16 +7,10 @@ import {
     CurrentPlayerColorType 
 } from '../../constants/currentPlayerColor.const';
 import { cellColors, CellColorsType } from '../../constants/cellColors.const';
-import { GameState, GameAction } from '../../game/state/gameState/GameState';
+import { useGameContext } from '../../game/GameContext';
 
 // Local
 import './board.scss';
-
-// Types
-type BoardProps = {
-    gameState: GameState;
-    dispatch: React.Dispatch<GameAction>;
-};
 
 // Declarations
 const determinePlayerDropIconColor = (currentPlayerColor: CurrentPlayerColorType): DropIconColorsType => {
@@ -35,10 +29,8 @@ const determineDropIconColors = (
 );
 
 // Component
-export const Board = ({
-    gameState,
-    dispatch
-}: BoardProps) => {
+export const Board = () => {
+    const { gameState } = useGameContext();
 
     const playerDropIconColor = determinePlayerDropIconColor(gameState.currentPlayerColor);
     const dropIconColors = determineDropIconColors(gameState.cells, playerDropIconColor);
@@ -47,7 +39,7 @@ export const Board = ({
         <div className="board">
             <div className="board__drop-zone">
                 {dropIconColors.map((dropIcon, index) => (
-                    <DropIcon key={index} color={dropIcon} index={index} dispatch={dispatch} />
+                    <DropIcon key={index} color={dropIcon} index={index} />
                 ))}                
             </div>
             <div className="board__game-space">
