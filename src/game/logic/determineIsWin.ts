@@ -1,8 +1,25 @@
 // Project
-import { cellColors, CellColorsType } from "../../constants/cellColors.const";
+import { CellColorsType } from "../../constants/cellColors.const";
 
 // Declarations
-const checkRowsForWin = (updatedCells: CellColorsType[][]): boolean => {
+const determineHasWon = (
+    position1: CellColorsType,
+    position2: CellColorsType,
+    position3: CellColorsType,
+    position4: CellColorsType,
+    colorToCheck: CellColorsType
+): boolean => {
+    const position1Match = colorToCheck === position1;
+    const position2Match = colorToCheck === position2;
+    const position3Match = colorToCheck === position3;
+    const position4Match = colorToCheck === position4;
+    return position1Match && position2Match && position3Match && position4Match;
+};
+
+const checkRowsForWin = (
+    updatedCells: CellColorsType[][],
+    colorToCheck: CellColorsType
+): boolean => {
 
     for (let row = 0; row < updatedCells.length; row++) {
         for (let col = 0; col < updatedCells[row].length - 3; col++) {
@@ -11,13 +28,14 @@ const checkRowsForWin = (updatedCells: CellColorsType[][]): boolean => {
             const position3 = updatedCells[row][col + 2];
             const position4 = updatedCells[row][col + 3];
 
-            const isNotClear = position1 !== cellColors.clear;
-            const position2Match = position1 === position2;
-            const position3Match = position1 === position3;
-            const position4Match = position1 === position4;
-            
-            const hasWon = isNotClear && position2Match && position3Match && position4Match;
-            
+            const hasWon = determineHasWon(
+                position1,
+                position2,
+                position3,
+                position4,
+                colorToCheck
+            );
+
             if (hasWon) {
                 return true;
             }
@@ -27,7 +45,10 @@ const checkRowsForWin = (updatedCells: CellColorsType[][]): boolean => {
     return false;
 };
 
-const checkColumnsForWin = (updatedCells: CellColorsType[][]): boolean => {
+const checkColumnsForWin = (
+    updatedCells: CellColorsType[][],
+    colorToCheck: CellColorsType
+): boolean => {
 
     for (let col = 0; col < updatedCells[0].length; col++) {
         for (let row = 0; row < updatedCells.length - 3; row++) {
@@ -36,13 +57,14 @@ const checkColumnsForWin = (updatedCells: CellColorsType[][]): boolean => {
             const position3 = updatedCells[row + 2][col];
             const position4 = updatedCells[row + 3][col];
 
-            const isNotClear = position1 !== cellColors.clear;
-            const position2Match = position1 === position2;
-            const position3Match = position1 === position3;
-            const position4Match = position1 === position4;
-            
-            const hasWon = isNotClear && position2Match && position3Match && position4Match;
-            
+            const hasWon = determineHasWon(
+                position1,
+                position2,
+                position3,
+                position4,
+                colorToCheck
+            );
+
             if (hasWon) {
                 return true;
             }
@@ -52,7 +74,10 @@ const checkColumnsForWin = (updatedCells: CellColorsType[][]): boolean => {
     return false;
 };
 
-const checkDiagonalTypeOneWin = (updatedCells: CellColorsType[][]): boolean => {
+const checkDiagonalTypeOneWin = (
+    updatedCells: CellColorsType[][],
+    colorToCheck: CellColorsType
+): boolean => {
 
     for (let row = 3; row < updatedCells.length; row++) {
         for (let col = 0; col < updatedCells[row].length - 3; col++) {
@@ -60,12 +85,14 @@ const checkDiagonalTypeOneWin = (updatedCells: CellColorsType[][]): boolean => {
             const position2 = updatedCells[row - 1][col + 1];
             const position3 = updatedCells[row - 2][col + 2];
             const position4 = updatedCells[row - 3][col + 3];
-            const isNotClear = position1 !== cellColors.clear;
-            const position2Match = position1 === position2;
-            const position3Match = position1 === position3;
-            const position4Match = position1 === position4;
-            
-            const hasWon = isNotClear && position2Match && position3Match && position4Match;
+
+            const hasWon = determineHasWon(
+                position1,
+                position2,
+                position3,
+                position4,
+                colorToCheck
+            );
 
             if (hasWon) {
                 return true;
@@ -76,7 +103,10 @@ const checkDiagonalTypeOneWin = (updatedCells: CellColorsType[][]): boolean => {
     return false;
 };
 
-const checkDiagonalTypeTwoWin = (updatedCells: CellColorsType[][]): boolean => {
+const checkDiagonalTypeTwoWin = (
+    updatedCells: CellColorsType[][],
+    colorToCheck: CellColorsType
+): boolean => {
 
     for (let row = 0; row < updatedCells.length - 3; row++) {
         for (let col = 0; col < updatedCells[row].length - 3; col++) {
@@ -84,12 +114,14 @@ const checkDiagonalTypeTwoWin = (updatedCells: CellColorsType[][]): boolean => {
             const position2 = updatedCells[row + 1][col + 1];
             const position3 = updatedCells[row + 2][col + 2];
             const position4 = updatedCells[row + 3][col + 3];
-            const isNotClear = position1 !== cellColors.clear;
-            const position2Match = position1 === position2;
-            const position3Match = position1 === position3;
-            const position4Match = position1 === position4;
-            
-            const hasWon = isNotClear && position2Match && position3Match && position4Match;
+
+            const hasWon = determineHasWon(
+                position1,
+                position2,
+                position3,
+                position4,
+                colorToCheck
+            );
 
             if (hasWon) {
                 return true;
@@ -100,23 +132,23 @@ const checkDiagonalTypeTwoWin = (updatedCells: CellColorsType[][]): boolean => {
     return false;
 };
 
-export const determineIsWin = (updatedCells: CellColorsType[][]): boolean => {
-    // NOTE: I am writing these checks with the assumption that they will be triggered each move.
-    // Therefore to keep the complexity down we dont have to check for the specific player color.
-
-    // Have added && conditions to short circuit and improve performance.
+export const determineIsWin = (
+    updatedCells: CellColorsType[][],
+    colorToCheck: CellColorsType
+): boolean => {
+    // NOTE: Have added && conditions to short circuit and improve performance.
 
     // 1. Check rows for a win
-    const isRowWin = checkRowsForWin(updatedCells);
+    const isRowWin = checkRowsForWin(updatedCells, colorToCheck);
 
     // 2. Check columns for win
-    const isColumnWin = !isRowWin && checkColumnsForWin(updatedCells);
+    const isColumnWin = !isRowWin && checkColumnsForWin(updatedCells, colorToCheck);
 
     // 3. Check bottom-left to top-right diagonals for win
-    const isDiagonalTypeOneWin = !isColumnWin && checkDiagonalTypeOneWin(updatedCells);
+    const isDiagonalTypeOneWin = !isColumnWin && checkDiagonalTypeOneWin(updatedCells, colorToCheck);
 
     // 4. Check top-left to bottom-right diagonals for win
-    const isDiagonalTypeTwoWin = !isDiagonalTypeOneWin && checkDiagonalTypeTwoWin(updatedCells);
+    const isDiagonalTypeTwoWin = !isDiagonalTypeOneWin && checkDiagonalTypeTwoWin(updatedCells, colorToCheck);
 
     return isRowWin || isColumnWin || isDiagonalTypeOneWin || isDiagonalTypeTwoWin;
 };

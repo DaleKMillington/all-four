@@ -8,10 +8,13 @@ import { determineIsWin } from "./determineIsWin";
 import { determineIsBoardFull } from "./determineIsBoardFull";
 
 // Declarations
-export const determineUpdatedGameOver = (updatedCells: CellColorsType[][]): GameOverType => {
+export const determineUpdatedGameOver = (
+    updatedCells: CellColorsType[][],
+    colorToCheck: CellColorsType
+): GameOverType => {
 
     // 1. Has a 4-in-a-row connection been made?
-    const isWin = determineIsWin(updatedCells);
+    const isWin = determineIsWin(updatedCells, colorToCheck);
     if (isWin){
         return gameOver.won;
     }

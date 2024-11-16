@@ -1,4 +1,6 @@
 // Project
+import { currentPlayerColor } from "../../../constants/currentPlayerColor.const";
+import { cellColors } from "../../../constants/cellColors.const";
 import { determineUpdatedCells } from "../../logic/determineUpdatedCells";
 import { determineNextPlayer } from "../../logic/determineNextPlayer";
 import { determineUpdatedGameOver } from "../../logic/determineUpdatedGameOver";
@@ -14,7 +16,9 @@ export const handleDropCell = (state: GameState, action: DropCellAction) => {
     const updatedCells = determineUpdatedCells(state, action);
 
     // 2. Has this move won OR is the board full?
-    const updatedGameOver = determineUpdatedGameOver(updatedCells);
+    const isCurrentPlayerRed = state.currentPlayerColor === currentPlayerColor.red;
+    const colorToCheck = isCurrentPlayerRed ? cellColors.red : cellColors.yellow;
+    const updatedGameOver = determineUpdatedGameOver(updatedCells, colorToCheck);
     if (updatedGameOver !== gameOverConst.inProgress){
         return {
             ...state,
