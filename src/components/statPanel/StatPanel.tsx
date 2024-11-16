@@ -110,11 +110,13 @@ export const StatPanel = () => {
     const isGameWon = gameOver === gameOverConst.won;
     const isGameDraw = gameOver === gameOverConst.draw;
 
+    const shouldShowRestart = !isPlayerAI || !isGameInProgress;
+
     const restartOnClick = () => dispatch({ type: actions.RESET_GAME });
 
     return (
         <div className='stat-panel'>
-            { !isPlayerAI && (
+            { shouldShowRestart && (
                 <button className="stat-panel__restart" onClick={ restartOnClick }>
                     Restart
                 </button>
