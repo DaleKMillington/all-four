@@ -6,6 +6,7 @@ import { determineIsWin } from "../determineIsWin";
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";
 import { determineAvailableColumns } from "./determineAvailableColumns";
 import { simulateDropCell } from "./simulateDropCell";
+import { determineColorToDrop } from "./determineColorToDrop";
 
 // Declarations
 export const checkForWinningMove = (
@@ -14,13 +15,16 @@ export const checkForWinningMove = (
     dropOpponentPiece: boolean
 ): boolean => {
 
-    // 1. Find the available columns
+    // 1. Determine the color to simulate dropping
+    const colorToDrop = determineColorToDrop(gameState, dropOpponentPiece);
+
+    // 2. Find the available columns
     const availableColumns = determineAvailableColumns(gameState);
 
-    // 2. Iterate over available columns and simulate making a move then check for a win.
+    // 3. Iterate over available columns and simulate making a move then check for a win.
     for (const colIndex of availableColumns) {
-        const simulatedCells = simulateDropCell(gameState, colIndex, dropOpponentPiece);
-        const isSimulationAWin = determineIsWin(simulatedCells);
+        const simulatedCells = simulateDropCell(gameState, colIndex, colorToDrop);
+        const isSimulationAWin = determineIsWin(simulatedCells, colorToDrop);
         if (isSimulationAWin) {
             handleMakeMoveWithDelay(colIndex);
             return true;

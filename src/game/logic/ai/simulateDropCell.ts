@@ -1,15 +1,14 @@
 // Project
 import { GameState } from "../../state/gameState/GameState";
-import { cellColors } from "../../../constants/cellColors.const";
-import { currentPlayerColor as currentPlayerColorConst } from "../../../constants/currentPlayerColor.const";
+import { cellColors, CellColorsType } from "../../../constants/cellColors.const";
 
 // Declarations
 export const simulateDropCell = (
     gameState: GameState,
     colIndex: number,
-    dropOpponentPiece: boolean = false
+    colorToDrop: CellColorsType
 ) => {
-    const { cells, currentPlayerColor } = gameState;
+    const { cells } = gameState;
 
     // TODO: Have borrowed this logic from determineUpdatedCells.
     // Plus this logic is starting to look a bit grim so a refactor would be ideal time permitting.
@@ -22,10 +21,10 @@ export const simulateDropCell = (
         }
     }
 
-    const isPlayerRed = currentPlayerColor === currentPlayerColorConst.red;
-    const activePlayerColor = isPlayerRed ? cellColors.red : cellColors.yellow;
-    const colorToDrop = !dropOpponentPiece ? activePlayerColor : 
-        activePlayerColor === cellColors.red ? cellColors.yellow : cellColors.red;
+    // const isPlayerRed = currentPlayerColor === currentPlayerColorConst.red;
+    // const activePlayerColor = isPlayerRed ? cellColors.red : cellColors.yellow;
+    // const colorToDrop = !dropOpponentPiece ? activePlayerColor : 
+    //     activePlayerColor === cellColors.red ? cellColors.yellow : cellColors.red;
 
     const updatedCells = [...cells];
     updatedCells[rowIndex] = [...updatedCells[rowIndex]];

@@ -1,5 +1,4 @@
 // Project
-import { GameState } from "../state/gameState/GameState";
 import { CellColorsType } from "../../constants/cellColors.const";
 import { gameOver, GameOverType } from "../../constants/gameOver.const";
 
