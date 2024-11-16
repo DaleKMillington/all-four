@@ -9,6 +9,8 @@ import { actions, GameAction } from "../../state/gameState/GameState";
 import { checkForWinningMove } from './checkForWinningMove';
 import { checkForDoubleWinSetup } from './checkForDoubleWinSetup';
 import { determineClosestToCenterPosition } from "./determineClosestToCenterPosition";
+import { checkForThreePiecesConnected } from './checkForThreePiecesConnected';
+import { checkForTwoPiecesConnected } from './checkForTwoPiecesConnected';
 
 // Types
 export type HandleMakeMoveWithDelayType = (colIndex: number) => void;
@@ -30,14 +32,17 @@ const constructHandleMakeMoveWithDelay = (dispatch: Dispatch<GameAction>) => (co
 
 export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     // I am going to design this AI to follow a set of heuristics based on priority.
-    // Due to time constraints this is not going to be super intelligent.
+    // Due to time constraints this is not going to be super intelligent!
+
     // 1. If there is a winning move - take it! 
     // 2. If there is a move that would block a winning move - take it!
-    // 3. If there is a move that gurantees 2 possible winning moves in the next turn - take it!
+    // 3. If there is a move that gurantees two possible winning moves in the next turn - take it!
     // 4. If there is a move that blocks the other player from a guranteed 2 possible winning moves next turn - take it!
-    // 5. If there is a move that gives 3 connected pieces - take it!
-    // 6. If there is a move that gives 2 connected pieces - take it!
-    // 7. If none of the above are satisfied - then favour as close to the center of the board.
+    // 5. If there is a move that gives three connected pieces - take it!
+    // 6. If there is a move that blocks the other player from gettings three pieces connected - take it!
+    // 7. If there is a move that gives two connected pieces - take it!
+    // 8. If there is a move that blocks the other player from gettings two pieces connected - take it!    
+    // 9. If none of the above are satisfied - then favour as close to the center of the board.
     
     // Higher order to bind dispatch and can be passed to each heuristic function.
     const handleMakeMoveWithDelay = constructHandleMakeMoveWithDelay(dispatch);
@@ -66,6 +71,30 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
         return;
     }
 
-    // 7. Favour closest to center as possible.
+    // 5. If there is a move that allows three connected pieces then take it.
+    const threeConnectedPieces = checkForThreePiecesConnected(gameState, handleMakeMoveWithDelay, false);
+    if (threeConnectedPieces) {
+        return;
+    }
+
+    // 6. If there is a move that that gives the opponent three connected pieces then block it.
+    const blockThreeConnectedPieces = checkForThreePiecesConnected(gameState, handleMakeMoveWithDelay, true);
+    if (blockThreeConnectedPieces) {
+        return;
+    }
+
+    // 7. If there is a move that allows two connected pieces then take it.
+    const twoConnectedPieces = checkForTwoPiecesConnected(gameState, handleMakeMoveWithDelay, false);
+    if (twoConnectedPieces) {
+        return;
+    }
+
+    // 8. If there is a move that that gives the opponent two connected pieces then block it.
+    const blockTwoConnectedPieces = checkForTwoPiecesConnected(gameState, handleMakeMoveWithDelay, true);
+    if (blockTwoConnectedPieces) {
+        return;
+    }
+
+    // 9. Favour closest to center as possible.
     determineClosestToCenterPosition(gameState, handleMakeMoveWithDelay); 
 };
