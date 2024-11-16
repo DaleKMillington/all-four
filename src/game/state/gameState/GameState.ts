@@ -2,6 +2,7 @@
 import { cellColors, CellColorsType } from "../../../constants/cellColors.const";
 import { currentPlayer, CurrentPlayerType } from "../../../constants/currentPlayer.const";
 import { currentPlayerColor, CurrentPlayerColorType } from "../../../constants/currentPlayerColor.const";
+import { gameOver, GameOverType } from "../../../constants/gameOver.const";
 import { handleDropCell } from "./handleDropCell";
 
 // Actions
@@ -16,7 +17,7 @@ export type GameState = {
     currentPlayer: CurrentPlayerType; // Human or AI
     currentPlayerColor: CurrentPlayerColorType; // The color of the current player
     firstPlayer: boolean; // Whether this player starts the game
-    gameOver: boolean;  // Has the game ended
+    gameOver: GameOverType;  // Has the game ended by win or draw, or is it still in progress
 };
 
 export type DropCellAction = {
@@ -45,7 +46,7 @@ export const initialState = {
     currentPlayer: currentPlayer.human,
     currentPlayerColor: currentPlayerColor.red,
     firstPlayer: true,
-    gameOver: false,
+    gameOver: gameOver.inProgress,
 };
 
 // Reducer

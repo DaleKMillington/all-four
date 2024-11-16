@@ -31,7 +31,9 @@
     padding: 0 20px;
     color: $background-color;
     font-weight: bold;
+}
 
+.in-progress {
     &__current-player {
         font-size: 32px;
         font-style: italic;
@@ -61,4 +63,20 @@
             
         }
     }
+}
+
+.game-won {
+    font-size: 32px;
+
+    &--red {
+        color: $red-coin-color;
+    }
+
+    &--yellow {
+        color: $yellow-coin-color;
+    }
+}
+
+.game-draw {
+    font-size: 32px; 
 }

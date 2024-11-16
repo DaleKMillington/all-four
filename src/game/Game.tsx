@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 // Project
 import { Board } from '../components/board/Board';
 import { currentPlayer as currentPlayerConst } from '../constants/currentPlayer.const';
+import { gameOver as gameOverConst } from '../constants/gameOver.const';
 import { handleAIMove } from './logic/handleAIMove';
 
 // Local
@@ -13,14 +14,16 @@ import { useGameContext } from './GameContext';
 // Component
 export const Game = () => {
     const { gameState, dispatch } = useGameContext();
-    const { currentPlayer } = gameState;
-    const isAIPlayer = currentPlayer === currentPlayerConst.ai;
+    const { currentPlayer, gameOver } = gameState;
     
+    const isAIPlayer = currentPlayer === currentPlayerConst.ai;
+    const isGameInProgress = gameOver === gameOverConst.inProgress;
+
     useEffect(() => {
-        if (isAIPlayer) {
+        if (isAIPlayer && isGameInProgress) {
             handleAIMove({ gameState, dispatch });
         }
-    }, [isAIPlayer, gameState, dispatch]);
+    }, [isAIPlayer, isGameInProgress, gameState, dispatch]);
 
     return (
         <div className='game'>
