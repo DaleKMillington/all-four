@@ -13,7 +13,7 @@ export type HandleMakeMoveWithDelayType = (colIndex: number) => void;
 const constructHandleMakeMoveWithDelay = (dispatch: Dispatch<GameAction>) => (colIndex: number) => {
     // Imitate the AI thinking otherwise the effect is just instant and looks bad.
     // Have chosen random delay times from 2.5 second up to 5 seconds in .5 second intervals.
-    const delayTimes = [2500, 3000, 3500, 4000, 4500, 5000];
+    const delayTimes = [2500, 3000, 3500];
     const randomDelay = delayTimes[Math.floor(Math.random() * delayTimes.length)];    
 
     setTimeout(() => {
@@ -36,7 +36,10 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     // 6. If there is a move that gives 2 connected pieces - take it!
     // 7. If none of the above are satisfied - then favour as close to the center of the board.
     
+    // Higher order to bind dispatch and can be passed to each heuristic function.
     const handleMakeMoveWithDelay = constructHandleMakeMoveWithDelay(dispatch);
+
+
 
     // 7. Favour closest to center as possible.
     determineClosestToCenterPosition(gameState, handleMakeMoveWithDelay); 
