@@ -10,7 +10,8 @@ import { simulateDropCell } from "./simulateDropCell";
 // Declarations
 export const checkForWinningMove = (
     gameState: GameState,
-    handleMakeMoveWithDelay: HandleMakeMoveWithDelayType
+    handleMakeMoveWithDelay: HandleMakeMoveWithDelayType,
+    dropOpponentPiece: boolean
 ): boolean => {
 
     // 1. Find the available columns
@@ -19,7 +20,7 @@ export const checkForWinningMove = (
     // 2. Iterate over available columns and simulate making a move.
     // Then I can check whether any move results in a win by reusing logic from handleDropCell action flow.
     for (const colIndex of availableColumns) {
-        const simulatedCells = simulateDropCell(gameState, colIndex);
+        const simulatedCells = simulateDropCell(gameState, colIndex, dropOpponentPiece);
         const isSimulationAWin = determineIsWin(simulatedCells);
         if (isSimulationAWin) {
             handleMakeMoveWithDelay(colIndex);

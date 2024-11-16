@@ -42,8 +42,14 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     const handleMakeMoveWithDelay = constructHandleMakeMoveWithDelay(dispatch);
 
     // 1. If there is a winning move then take it.
-    const winningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay);
+    const winningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay, false);
     if (winningMove) {
+        return;
+    }
+
+    // 2. If there is a move that blocks a winning move then take it.
+    const blockWinningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay, true);
+    if (blockWinningMove) {
         return;
     }
 
