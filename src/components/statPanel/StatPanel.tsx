@@ -5,7 +5,6 @@ import {
     CurrentPlayerColorType 
 } from '../../constants/currentPlayerColor.const';
 import { 
-    currentPlayer,
     currentPlayer as currentPlayerConst,
     CurrentPlayerType 
 } from '../../constants/currentPlayer.const';
