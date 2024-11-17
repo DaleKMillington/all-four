@@ -9,7 +9,7 @@ import {
     currentPlayer as currentPlayerConst,
     CurrentPlayerType 
 } from '../../constants/currentPlayer.const';
-import { gameOver as gameOverConst } from '../../constants/gameOver.const';
+import { gamePhase as gamePhaseConst } from '../../constants/gamePhase.const';
 
 // Local
 import './statPanel.scss';
@@ -102,13 +102,13 @@ const GameDraw = () => {
 
 export const StatPanel = () => {
     const { gameState, dispatch } = useGameContext();
-    const { currentPlayer, gameOver } = gameState;
+    const { currentPlayer, gamePhase } = gameState;
 
     const isPlayerAI = currentPlayer === currentPlayerConst.ai;
 
-    const isGameInProgress = gameOver === gameOverConst.inProgress;
-    const isGameWon = gameOver === gameOverConst.won;
-    const isGameDraw = gameOver === gameOverConst.draw;
+    const isGameInProgress = gamePhase === gamePhaseConst.inProgress;
+    const isGameWon = gamePhase === gamePhaseConst.won;
+    const isGameDraw = gamePhase === gamePhaseConst.draw;
 
     const shouldShowRestart = !isPlayerAI || !isGameInProgress;
 

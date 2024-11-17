@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 // Project
 import { Board } from '../components/board/Board';
 import { currentPlayer as currentPlayerConst } from '../constants/currentPlayer.const';
-import { gameOver as gameOverConst } from '../constants/gameOver.const';
+import { gamePhase as gamePhaseConst } from '../constants/gamePhase.const';
 import { handleAIMove } from './logic/ai/handleAIMove';
 
 // Local
@@ -14,10 +14,10 @@ import { useGameContext } from './GameContext';
 // Component
 export const Game = () => {
     const { gameState, dispatch } = useGameContext();
-    const { currentPlayer, gameOver } = gameState;
+    const { currentPlayer, gamePhase } = gameState;
     
     const isAIPlayer = currentPlayer === currentPlayerConst.ai;
-    const isGameInProgress = gameOver === gameOverConst.inProgress;
+    const isGameInProgress = gamePhase === gamePhaseConst.inProgress;
 
     useEffect(() => {
         if (isAIPlayer && isGameInProgress) {

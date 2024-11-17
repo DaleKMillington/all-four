@@ -3,8 +3,8 @@ import { currentPlayerColor } from "../../constants/currentPlayerColor.const";
 import { cellColors } from "../../constants/cellColors.const";
 import { determineUpdatedCells } from "./determineUpdatedCells";
 import { determineNextPlayer } from "./determineNextPlayer";
-import { determineUpdatedGameOver } from "./determineUpdatedGameOver";
-import { gameOver as gameOverConst } from "../../constants/gameOver.const";
+import { determineUpdatedGamePhase } from "./determineUpdatedGamePhase";
+import { gamePhase as gamePhaseConst } from "../../constants/gamePhase.const";
 
 // Local
 import { GameState, DropCellAction } from "../GameState";
@@ -18,12 +18,12 @@ export const handleDropCell = (state: GameState, action: DropCellAction) => {
     // 2. Has this move won OR is the board full?
     const isCurrentPlayerRed = state.currentPlayerColor === currentPlayerColor.red;
     const colorToCheck = isCurrentPlayerRed ? cellColors.red : cellColors.yellow;
-    const updatedGameOver = determineUpdatedGameOver(updatedCells, colorToCheck);
-    if (updatedGameOver !== gameOverConst.inProgress){
+    const updatedGamePhase = determineUpdatedGamePhase(updatedCells, colorToCheck);
+    if (updatedGamePhase !== gamePhaseConst.inProgress){
         return {
             ...state,
             cells: updatedCells,
-            gameOver: updatedGameOver
+            gameOver: updatedGamePhase
         }
     }
 
@@ -35,10 +35,11 @@ export const handleDropCell = (state: GameState, action: DropCellAction) => {
     } = determineNextPlayer(state);
 
     return {
+        ...state,
         cells: updatedCells,
         currentPlayer: updatedCurrentPlayer,
         currentPlayerColor: updatedCurrentPlayerColor,
         firstPlayer: updatedFirstPlayer,
-        gameOver: updatedGameOver
+        gamePhase: updatedGamePhase
     };    
 };
