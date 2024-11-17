@@ -1,13 +1,13 @@
 // Project
-import { currentPlayerColor } from "../../../constants/currentPlayerColor.const";
-import { cellColors } from "../../../constants/cellColors.const";
-import { determineUpdatedCells } from "../../logic/determineUpdatedCells";
-import { determineNextPlayer } from "../../logic/determineNextPlayer";
-import { determineUpdatedGameOver } from "../../logic/determineUpdatedGameOver";
-import { gameOver as gameOverConst } from "../../../constants/gameOver.const";
+import { currentPlayerColor } from "../../constants/currentPlayerColor.const";
+import { cellColors } from "../../constants/cellColors.const";
+import { determineUpdatedCells } from "./determineUpdatedCells";
+import { determineNextPlayer } from "./determineNextPlayer";
+import { determineUpdatedGameOver } from "./determineUpdatedGameOver";
+import { gameOver as gameOverConst } from "../../constants/gameOver.const";
 
 // Local
-import { GameState, DropCellAction } from "../../GameState";
+import { GameState, DropCellAction } from "../GameState";
 
 // Declarations
 export const handleDropCell = (state: GameState, action: DropCellAction) => {
