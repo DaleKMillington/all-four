@@ -4,6 +4,7 @@ import { Game } from "./game/Game";
 import { gamePhase as gamePhaseConst } from "./constants/gamePhase.const";
 import { useGameContext } from "./game/GameContext";
 import { Fade } from "./components/fade/Fade";
+import { Settings } from "./components/settings/Settings";
 
 // Component
 export const App = () => {
@@ -12,7 +13,10 @@ export const App = () => {
     return (
         <>
             { showSetupPanel && (
-                <Fade />
+                <>
+                    <Fade />
+                    <Settings />
+                </>
             ) }
             <StatPanel />
             <Game /> 

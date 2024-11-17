@@ -1,0 +1,33 @@
+@use '/src/scss/variables' as *;
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 20%);
+    }
+    75% {
+        transform: translate(-50%, -55%);        
+    }
+    100% {
+        opacity: .85;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.settings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: $background-color;
+    height: 500px;
+    width: 500px;
+    border-radius: 12px;
+    z-index: 30;
+    opacity: 0;
+    transform: translate(-50%, 20%);
+    animation: none;
+
+    &__appear {
+        animation: fadeInUp 0.8s ease forwards;
+    }
+}
