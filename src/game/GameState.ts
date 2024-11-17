@@ -43,13 +43,14 @@ type ResetGameAction = {
 export type GameAction = LaunchGameAction | DropCellAction | ResetGameAction;
 
 // Initial state (Just to be explicit will do it in full)
+const { clear } = cellColors;
 const emptyBoard: CellColorsType[][] = [
-    [cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear],
-    [cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear],
-    [cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear],
-    [cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear],
-    [cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear],
-    [cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear, cellColors.clear],
+    [clear, clear, clear, clear, clear, clear, clear],
+    [clear, clear, clear, clear, clear, clear, clear],
+    [clear, clear, clear, clear, clear, clear, clear],
+    [clear, clear, clear, clear, clear, clear, clear],
+    [clear, clear, clear, clear, clear, clear, clear],
+    [clear, clear, clear, clear, clear, clear, clear],
 ]
 
 export const initialState = {
