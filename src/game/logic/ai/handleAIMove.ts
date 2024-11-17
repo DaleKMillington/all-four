@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 
 // Project
 import { GameContextValueType } from "../../GameContext";
-import { actions, GameAction } from "../../state/gameState/GameState";
+import { actions, GameAction } from '../../GameState';
 
 // Local
 import { checkForWinningMove } from './checkForWinningMove';

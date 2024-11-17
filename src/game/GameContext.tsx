@@ -1,6 +1,6 @@
 // Third Party
 import { createContext, useContext, useReducer, ReactNode, Dispatch } from 'react';
-import { gameReducer, initialState, GameState, GameAction } from './state/gameState/GameState';
+import { gameReducer, initialState, GameState, GameAction } from './GameState';
 
 // Types
 export type GameContextValueType = {

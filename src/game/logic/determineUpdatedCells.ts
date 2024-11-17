@@ -1,5 +1,5 @@
 // Project
-import { GameState, DropCellAction } from "../state/gameState/GameState";
+import { GameState, DropCellAction } from "../GameState";
 import { cellColors } from "../../constants/cellColors.const";
 import { currentPlayerColor as currentPlayerColorConst } from "../../constants/currentPlayerColor.const";
 

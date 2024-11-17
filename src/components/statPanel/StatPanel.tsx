@@ -1,5 +1,5 @@
 // Project
-import { actions } from '../../game/state/gameState/GameState';
+import { actions } from '../../game/GameState';
 import { useGameContext } from '../../game/GameContext';
 import { 
     currentPlayerColor as currentPlayerColorConst,

@@ -1,5 +1,5 @@
 // Project
-import { GameState } from "../state/gameState/GameState";
+import { GameState } from "../GameState";
 import { currentPlayerColor as currentPlayerColorConst } from "../../constants/currentPlayerColor.const";
 import { currentPlayer as currentPlayerConst } from "../../constants/currentPlayer.const";
 

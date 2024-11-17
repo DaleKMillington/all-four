@@ -1,5 +1,5 @@
 // Project
-import { GameState } from "../../state/gameState/GameState";
+import { GameState } from "../../GameState";
 
 // Local
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";

@@ -1,5 +1,5 @@
 // Project
-import { actions } from '../../game/state/gameState/GameState';
+import { actions } from '../../game/GameState';
 import { dropIconColors, DropIconColorsType } from '../../constants/dropIconColors.const';
 import { useGameContext } from '../../game/GameContext';
 

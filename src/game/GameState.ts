@@ -1,9 +1,9 @@
 // Project
-import { cellColors, CellColorsType } from "../../../constants/cellColors.const";
-import { currentPlayer, CurrentPlayerType } from "../../../constants/currentPlayer.const";
-import { currentPlayerColor, CurrentPlayerColorType } from "../../../constants/currentPlayerColor.const";
-import { gameOver, GameOverType } from "../../../constants/gameOver.const";
-import { handleDropCell } from "./handleDropCell";
+import { cellColors, CellColorsType } from "../constants/cellColors.const";
+import { currentPlayer, CurrentPlayerType } from "../constants/currentPlayer.const";
+import { currentPlayerColor, CurrentPlayerColorType } from "../constants/currentPlayerColor.const";
+import { gameOver, GameOverType } from "../constants/gameOver.const";
+import { handleDropCell } from "./state/gameState/handleDropCell";
 
 // Actions
 export const actions = {

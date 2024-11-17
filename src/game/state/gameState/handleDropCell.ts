@@ -7,7 +7,7 @@ import { determineUpdatedGameOver } from "../../logic/determineUpdatedGameOver";
 import { gameOver as gameOverConst } from "../../../constants/gameOver.const";
 
 // Local
-import { GameState, DropCellAction } from "./GameState";
+import { GameState, DropCellAction } from "../../GameState";
 
 // Declarations
 export const handleDropCell = (state: GameState, action: DropCellAction) => {

@@ -1,5 +1,5 @@
 // Project
-import { GameState } from "../../state/gameState/GameState";
+import { GameState } from "../../GameState";
 import { determineIsWin } from "../determineIsWin";
 
 // Local
