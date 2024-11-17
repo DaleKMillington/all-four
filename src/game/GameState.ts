@@ -4,11 +4,13 @@ import { currentPlayer, CurrentPlayerType } from "../constants/currentPlayer.con
 import { currentPlayerColor, CurrentPlayerColorType } from "../constants/currentPlayerColor.const";
 import { gamePhase, GamePhaseType } from "../constants/gamePhase.const";
 import { handleDropCell } from "./logic/handleDropCell";
+import { handleLaunchGame } from "./logic/handleLaunchGame";
 
 // Actions
 export const actions = {
-    DROP_CELL: 0,
-    RESET_GAME: 1,
+    LAUNCH_GAME: 0, // Lanuches the game from the settings modal
+    DROP_CELL: 1, // Handle the droppoing of a piece either by human or ai
+    RESET_GAME: 2, // Reset the game to its initial state. Used to restart.
 } as const;
 
 // Types
@@ -21,6 +23,14 @@ export type GameState = {
     gamePhase: GamePhaseType;  // Has the game not started, in progress, or ended by win or draw
 };
 
+export type LaunchGameAction = {
+    type: typeof actions.LAUNCH_GAME;
+    payload: {
+        player1: CurrentPlayerType,
+        player2: CurrentPlayerType 
+    };
+};
+
 export type DropCellAction = {
     type: typeof actions.DROP_CELL;
     payload: { colIndex: number };
@@ -30,7 +40,7 @@ type ResetGameAction = {
     type: typeof actions.RESET_GAME;
 };
 
-export type GameAction = DropCellAction | ResetGameAction;
+export type GameAction = LaunchGameAction | DropCellAction | ResetGameAction;
 
 // Initial state (Just to be explicit will do it in full)
 const emptyBoard: CellColorsType[][] = [
@@ -57,6 +67,7 @@ export const initialState = {
 // Reducer
 export const gameReducer = (state: GameState, action: GameAction): GameState => {
     switch(action.type){
+        case actions.LAUNCH_GAME: return handleLaunchGame(state, action);
         case actions.DROP_CELL: return handleDropCell(state, action);
         case actions.RESET_GAME: return initialState;
     }

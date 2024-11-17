@@ -5,12 +5,10 @@ import { determineUpdatedCells } from "./determineUpdatedCells";
 import { determineNextPlayer } from "./determineNextPlayer";
 import { determineUpdatedGamePhase } from "./determineUpdatedGamePhase";
 import { gamePhase as gamePhaseConst } from "../../constants/gamePhase.const";
-
-// Local
 import { GameState, DropCellAction } from "../GameState";
 
 // Declarations
-export const handleDropCell = (state: GameState, action: DropCellAction) => {
+export const handleDropCell = (state: GameState, action: DropCellAction): GameState => {
 
     // 1. Get the updated cells
     const updatedCells = determineUpdatedCells(state, action);

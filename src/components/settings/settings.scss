@@ -74,7 +74,7 @@
         color: $background-color;
         padding: 10px 20px;
         border: 2px solid transparent;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 24px;
         font-weight: bold;
@@ -91,7 +91,8 @@
     background: $board-color;
     cursor: pointer;
     padding: 10px 20px;
-    border-radius: 4px;
+    border: 2px solid transparent;
+    border-radius: 8px;
 
     &--red {
         border-color: $red-coin-color;
@@ -105,6 +106,10 @@
 
     &--active {
         cursor: default;
-        border: 2px solid;
+
+    }
+
+    &--not-active {
+        border-color: transparent;
     }
 }
