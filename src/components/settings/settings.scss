@@ -9,13 +9,14 @@
         transform: translate(-50%, -55%);        
     }
     100% {
-        opacity: .85;
+        opacity: .92;
         transform: translate(-50%, -50%);
     }
 }
 
 .settings {
     position: absolute;
+    display: flex;
     top: 50%;
     left: 50%;
     background: $background-color;
@@ -29,5 +30,17 @@
 
     &__appear {
         animation: fadeInUp 0.8s ease forwards;
+    }
+
+    &__header {
+        color: $board-color;
+        font-size: 28px;
+        font-weight: bold;
+        padding: 30px 0;
+        margin: 0 auto 0 auto;
+    }
+
+    &__footer {
+        position: absolute;
     }
 }

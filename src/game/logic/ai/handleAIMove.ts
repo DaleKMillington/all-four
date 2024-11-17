@@ -18,8 +18,8 @@ export type HandleMakeMoveWithDelayType = (colIndex: number) => void;
 // Declarations
 const constructHandleMakeMoveWithDelay = (dispatch: Dispatch<GameAction>) => (colIndex: number) => {
     // Imitate the AI thinking otherwise the effect is just instant and looks bad.
-    // Have chosen random delay times from 2.5 second up to 5 seconds in .5 second intervals.
-    const delayTimes = [2500, 3000, 3500];
+    // Have chosen random delay times from 1 second up to 2 seconds in .5 second intervals.
+    const delayTimes = [1000, 1500, 2000];
     const randomDelay = delayTimes[Math.floor(Math.random() * delayTimes.length)];    
 
     setTimeout(() => {
