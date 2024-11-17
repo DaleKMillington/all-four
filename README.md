@@ -40,7 +40,6 @@ npm install
 ```bash
 npm run dev
 ```
-Open your browser and navigate to the local development URL provided by Vite.
 
 5. **Build the Production Version**
 To create a production build:
