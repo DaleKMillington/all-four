@@ -68,8 +68,6 @@
 
 .in-progress {
     &__current-player {
-        font-style: italic;
-
         @include main-font-weight;
 
         &--red {
