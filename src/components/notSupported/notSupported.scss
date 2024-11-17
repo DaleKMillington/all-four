@@ -1,0 +1,16 @@
+.not-supported {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    height: 98vh;
+
+    &__header {
+        font-size: 32px;
+    }
+
+    &__text {
+        font-size: 14px;
+    }
+}
