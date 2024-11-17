@@ -18,6 +18,18 @@
     }
 }
 
+@mixin main-font-weight {
+    font-size: 22px;
+
+    @media(min-width: $breakpoint-medium){
+        font-size: 24px;
+    }
+
+    @media(min-width: $breakpoint-large){
+        font-size: 32px;
+    }
+}
+
 .stat-panel {
     position: relative;
     display: flex;
@@ -56,8 +68,9 @@
 
 .in-progress {
     &__current-player {
-        font-size: 32px;
         font-style: italic;
+
+        @include main-font-weight;
 
         &--red {
             color: $red-coin-color;
@@ -69,7 +82,11 @@
     }
 
     &__sub-text {
-        font-size: 26px;
+        font-size: 22px;
+
+        @media(min-width: $breakpoint-medium){
+            font-size: 24px;
+        }
 
         &--ai {
             position: relative;
@@ -87,7 +104,7 @@
 }
 
 .game-won {
-    font-size: 32px;
+    @include main-font-weight;
 
     &--red {
         color: $red-coin-color;
@@ -99,5 +116,5 @@
 }
 
 .game-draw {
-    font-size: 32px; 
+    @include main-font-weight;
 }
