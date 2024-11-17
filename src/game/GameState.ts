@@ -17,6 +17,7 @@ export type GameState = {
     currentPlayer: CurrentPlayerType; // Human or AI
     currentPlayerColor: CurrentPlayerColorType; // The color of the current player
     firstPlayer: boolean; // Whether this player starts the game
+    playerTypes: CurrentPlayerType[]; // Is each player AI or Human 
     gamePhase: GamePhaseType;  // Has the game not started, in progress, or ended by win or draw
 };
 
@@ -46,7 +47,11 @@ export const initialState = {
     currentPlayer: currentPlayer.human,
     currentPlayerColor: currentPlayerColor.red,
     firstPlayer: true,
-    gamePhase: gamePhase.inProgress,
+    playerTypes: [
+        currentPlayer.human,
+        currentPlayer.ai
+    ],
+    gamePhase: gamePhase.notStarted,
 };
 
 // Reducer
