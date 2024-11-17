@@ -6,8 +6,14 @@ import { createRoot } from 'react-dom/client'
 import { App } from './App.tsx'
 import './scss/main.scss'
 
+// Local
+import { GameProvider } from "./game/GameContext";
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <GameProvider>
+        <App />
+    </GameProvider>
   </StrictMode>,
 )
