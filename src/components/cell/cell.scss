@@ -5,18 +5,64 @@
     border: 4px solid darken($color, $amount);
 }
 
+$yellow-gradient: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.9) 25%,
+    rgba(255, 255, 255, 0) 75%
+);
+
+$red-gradient: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+);
+
+@mixin shimmer-effect($gradient) {
+    animation: shimmer 2s ease forwards;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $gradient;
+        background-size: 200% 200%;
+        animation: shimmer 2s ease forwards;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -150% -150%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
 .cell {
     border-radius: 50%;
+    animation: none;
+    position: relative;
+    overflow: hidden;
 
     &--clear {
-        @include color-modifier($background-color, 0)
+        @include color-modifier($background-color, 0);
     }
 
     &--red {
-        @include color-modifier($red-coin-color, 10)
+        @include color-modifier($red-coin-color, 10);
+        @include shimmer-effect($red-gradient);
     }
 
     &--yellow {
-        @include color-modifier($yellow-coin-color, 20)
+        @include color-modifier($yellow-coin-color, 20);
+        @include shimmer-effect($yellow-gradient);
     }
 }
