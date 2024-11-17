@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { defineConfig as defineVitestConfig } from 'vitest';
+// @ts-ignore
+import { defineConfig as defineVitestConfig } from 'vitest/config';
 
+// Vite config with Vitest setup
 export default defineConfig({
   plugins: [react()],
   test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.ts', // optional, to set up tests
+    globals: true,  // Enables globals like describe, it, etc.
+    environment: 'jsdom',  // Use jsdom for testing in a browser-like environment
+    setupFiles: './src/setupTests.ts',  // Optional setup for tests
   },
 });
