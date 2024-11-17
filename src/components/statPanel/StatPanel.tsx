@@ -106,12 +106,11 @@ export const StatPanel = () => {
 
     const isPlayerAI = currentPlayer === currentPlayerConst.ai;
 
-    const hasGameNotStarted = gamePhase === gamePhaseConst.notStarted;
     const isGameInProgress = gamePhase === gamePhaseConst.inProgress;
     const isGameWon = gamePhase === gamePhaseConst.won;
     const isGameDraw = gamePhase === gamePhaseConst.draw;
 
-    const shouldShowRestart = !isPlayerAI && !(isGameInProgress || hasGameNotStarted);
+    const shouldShowRestart = isGameDraw || isGameWon || (isGameInProgress && !isPlayerAI);
 
     const restartOnClick = () => dispatch({ type: actions.RESET_GAME });
 

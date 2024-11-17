@@ -46,7 +46,7 @@ export const initialState = {
     currentPlayer: currentPlayer.human,
     currentPlayerColor: currentPlayerColor.red,
     firstPlayer: true,
-    gamePhase: gamePhase.notStarted,
+    gamePhase: gamePhase.inProgress,
 };
 
 // Reducer

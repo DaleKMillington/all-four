@@ -23,7 +23,7 @@ export const handleDropCell = (state: GameState, action: DropCellAction) => {
         return {
             ...state,
             cells: updatedCells,
-            gameOver: updatedGamePhase
+            gamePhase: updatedGamePhase
         }
     }
 
