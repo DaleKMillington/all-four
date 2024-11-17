@@ -33,19 +33,30 @@
     transition: transform 0.3s ease-in-out;
 
     &--clear {
-        @include color-modifier(transparent, 0)
+        @include color-modifier(transparent, 0);
+        
+        &:hover {
+            cursor: default;
+        }
     }
 
     &--red {
-        @include color-modifier($red-coin-color, 10)
+        @include color-modifier($red-coin-color, 10);
+        
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &--yellow {
-        @include color-modifier($yellow-coin-color, 20)
+        @include color-modifier($yellow-coin-color, 20);
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &:hover {
-        cursor: pointer;
         animation: float 1s ease-in-out infinite;
     }
 }
