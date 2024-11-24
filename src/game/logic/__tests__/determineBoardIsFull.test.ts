@@ -2,8 +2,8 @@
 import { describe, it, expect } from 'vitest';
 
 // Project
-import { determineIsBoardFull } from '../logic/determineIsBoardFull';
-import { cellColors } from '../../constants/cellColors.const';
+import { determineIsBoardFull } from '../determineIsBoardFull';
+import { cellColors } from '../../../constants/cellColors.const';
 
 // Declarations
 const { clear, red, yellow } = cellColors;
