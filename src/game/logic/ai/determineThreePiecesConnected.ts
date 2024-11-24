@@ -6,6 +6,7 @@ Refactor / redesign this to remove redundancy!
 
 // Project
 import { CellColorsType } from "../../../constants/cellColors.const";
+import { checkRowsForSequence } from "../sequence/checkRowsForSequence";
 
 // Declarations
 const determineHasThreePiecesConnected = (
@@ -18,33 +19,6 @@ const determineHasThreePiecesConnected = (
     const position2Match = colorToCheck === position2;
     const position3Match = colorToCheck === position3;
     return position1Match && position2Match && position3Match;
-};
-
-const checkRowsForThreePiecesConnected = (
-    updatedCells: CellColorsType[][],
-    colorToCheck: CellColorsType
-): boolean => {
-
-    for (let row = 0; row < updatedCells.length; row++) {
-        for (let col = 0; col < updatedCells[row].length - 2; col++) {
-            const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row][col + 1];
-            const position3 = updatedCells[row][col + 2];
-
-            const isThree = determineHasThreePiecesConnected(
-                position1,
-                position2,
-                position3,
-                colorToCheck
-            );
-
-            if (isThree) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
 };
 
 const checkColumnsForThreePiecesConnected = (
@@ -135,6 +109,7 @@ export const determineThreePiecesConnected = (
     // NOTE: Have added && conditions to short circuit and improve performance.
 
     // 1. Check rows for three pieces connected.
+    const checkRowsForThreePiecesConnected = checkRowsForSequence(3);
     const isRowThreePiecesConnected = checkRowsForThreePiecesConnected(
         updatedCells,
         colorToCheck

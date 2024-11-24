@@ -1,5 +1,6 @@
 // Project
 import { CellColorsType } from "../../constants/cellColors.const";
+import { checkRowsForSequence } from "./sequence/checkRowsForSequence";
 
 // Declarations
 const determineHasWon = (
@@ -14,35 +15,6 @@ const determineHasWon = (
     const position3Match = colorToCheck === position3;
     const position4Match = colorToCheck === position4;
     return position1Match && position2Match && position3Match && position4Match;
-};
-
-const checkRowsForWin = (
-    updatedCells: CellColorsType[][],
-    colorToCheck: CellColorsType
-): boolean => {
-
-    for (let row = 0; row < updatedCells.length; row++) {
-        for (let col = 0; col < updatedCells[row].length - 3; col++) {
-            const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row][col + 1];
-            const position3 = updatedCells[row][col + 2];
-            const position4 = updatedCells[row][col + 3];
-
-            const hasWon = determineHasWon(
-                position1,
-                position2,
-                position3,
-                position4,
-                colorToCheck
-            );
-
-            if (hasWon) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
 };
 
 const checkColumnsForWin = (
@@ -139,6 +111,7 @@ export const determineIsWin = (
     // NOTE: Have added && conditions to short circuit and improve performance.
 
     // 1. Check rows for a win
+    const checkRowsForWin = checkRowsForSequence(4);
     const isRowWin = checkRowsForWin(updatedCells, colorToCheck);
 
     // 2. Check columns for win
