@@ -1,51 +1,11 @@
-/*
-TODO: 
-This is a shameless copy and modification of determineIswin.
-Refactor / redesign this to remove redundancy!
-*/
-
 // Project
 import { CellColorsType } from "../../../constants/cellColors.const";
 import { checkRowsForSequence } from "../sequence/checkRowsForSequence";
 import { checkColumnsForSequence } from "../sequence/checkColumnsForSequence";
 import { checkDiagonalTypeOneForSequence } from "../sequence/checkDiagonalTypeOneForSequence";
+import { checkDiagonalTypeTwoForSequence } from "../sequence/checkDiagonalTypeTwoForSequence";
 
 // Declarations
-const determineHasTwoPiecesConnected = (
-    position1: CellColorsType,
-    position2: CellColorsType,
-    colorToCheck: CellColorsType
-): boolean => {
-    const position1Match = colorToCheck === position1;
-    const position2Match = colorToCheck === position2;
-    return position1Match && position2Match;
-};
-
-const checkDiagonalTypeTwoTwoPiecesConnected = (
-    updatedCells: CellColorsType[][],
-    colorToCheck: CellColorsType
-): boolean => {
-
-    for (let row = 0; row < updatedCells.length - 1; row++) {
-        for (let col = 0; col < updatedCells[row].length - 1; col++) {
-            const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row + 1][col + 1];
-
-            const isTwo = determineHasTwoPiecesConnected(
-                position1,
-                position2,
-                colorToCheck
-            );
-
-            if (isTwo) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
-};
-
 export const determineTwoPiecesConnected = (
     updatedCells: CellColorsType[][],
     colorToCheck: CellColorsType
@@ -74,6 +34,7 @@ export const determineTwoPiecesConnected = (
     );
 
     // 4. Check top-left to bottom-right diagonals for two pieces connected.
+    const checkDiagonalTypeTwoTwoPiecesConnected = checkDiagonalTypeTwoForSequence(2);
     const isDiagonalTypeTwo = !isDiagonalTypeOne && checkDiagonalTypeTwoTwoPiecesConnected(
         updatedCells,
         colorToCheck
