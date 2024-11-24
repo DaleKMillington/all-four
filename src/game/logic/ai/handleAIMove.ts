@@ -6,11 +6,9 @@ import { GameContextValueType } from "../../GameContext";
 import { actions, GameAction } from '../../GameState';
 
 // Local
-import { checkForWinningMove } from './checkForWinningMove';
+import { checkForSimulatedSequence } from './checkForSimulatedSequence';
 import { checkForDoubleWinSetup } from './checkForDoubleWinSetup';
 import { determineClosestToCenterPosition } from "./determineClosestToCenterPosition";
-import { checkForThreePiecesConnected } from './checkForThreePiecesConnected';
-import { checkForTwoPiecesConnected } from './checkForTwoPiecesConnected';
 
 // Types
 export type HandleMakeMoveWithDelayType = (colIndex: number) => void;
@@ -48,13 +46,13 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     const handleMakeMoveWithDelay = constructHandleMakeMoveWithDelay(dispatch);
 
     // 1. If there is a winning move then take it.
-    const winningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay, false);
+    const winningMove = checkForSimulatedSequence(gameState, handleMakeMoveWithDelay, false, 4);
     if (winningMove) {
         return;
     }
 
     // 2. If there is a move that blocks a winning move then take it.
-    const blockWinningMove = checkForWinningMove(gameState, handleMakeMoveWithDelay, true);
+    const blockWinningMove = checkForSimulatedSequence(gameState, handleMakeMoveWithDelay, true, 4);
     if (blockWinningMove) {
         return;
     }
@@ -72,25 +70,25 @@ export const handleAIMove = ({gameState, dispatch}: GameContextValueType) => {
     }
 
     // 5. If there is a move that allows three connected pieces then take it.
-    const threeConnectedPieces = checkForThreePiecesConnected(gameState, handleMakeMoveWithDelay, false);
+    const threeConnectedPieces = checkForSimulatedSequence(gameState, handleMakeMoveWithDelay, false, 3);
     if (threeConnectedPieces) {
         return;
     }
 
     // 6. If there is a move that that gives the opponent three connected pieces then block it.
-    const blockThreeConnectedPieces = checkForThreePiecesConnected(gameState, handleMakeMoveWithDelay, true);
+    const blockThreeConnectedPieces = checkForSimulatedSequence(gameState, handleMakeMoveWithDelay, true, 3);
     if (blockThreeConnectedPieces) {
         return;
     }
 
     // 7. If there is a move that allows two connected pieces then take it.
-    const twoConnectedPieces = checkForTwoPiecesConnected(gameState, handleMakeMoveWithDelay, false);
+    const twoConnectedPieces = checkForSimulatedSequence(gameState, handleMakeMoveWithDelay, false, 2);
     if (twoConnectedPieces) {
         return;
     }
 
     // 8. If there is a move that that gives the opponent two connected pieces then block it.
-    const blockTwoConnectedPieces = checkForTwoPiecesConnected(gameState, handleMakeMoveWithDelay, true);
+    const blockTwoConnectedPieces = checkForSimulatedSequence(gameState, handleMakeMoveWithDelay, true, 2);
     if (blockTwoConnectedPieces) {
         return;
     }
