@@ -7,6 +7,7 @@ Refactor / redesign this to remove redundancy!
 // Project
 import { CellColorsType } from "../../../constants/cellColors.const";
 import { checkRowsForSequence } from "../sequence/checkRowsForSequence";
+import { checkColumnsForSequence } from "../sequence/checkColumnsForSequence";
 
 // Declarations
 const determineHasThreePiecesConnected = (
@@ -19,33 +20,6 @@ const determineHasThreePiecesConnected = (
     const position2Match = colorToCheck === position2;
     const position3Match = colorToCheck === position3;
     return position1Match && position2Match && position3Match;
-};
-
-const checkColumnsForThreePiecesConnected = (
-    updatedCells: CellColorsType[][],
-    colorToCheck: CellColorsType
-): boolean => {
-
-    for (let col = 0; col < updatedCells[0].length; col++) {
-        for (let row = 0; row < updatedCells.length - 2; row++) {
-            const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row + 1][col];
-            const position3 = updatedCells[row + 2][col];
-
-            const isThree = determineHasThreePiecesConnected(
-                position1,
-                position2,
-                position3,
-                colorToCheck
-            );
-
-            if (isThree) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
 };
 
 const checkDiagonalTypeOneThreePiecesConnected = (
@@ -110,28 +84,29 @@ export const determineThreePiecesConnected = (
 
     // 1. Check rows for three pieces connected.
     const checkRowsForThreePiecesConnected = checkRowsForSequence(3);
-    const isRowThreePiecesConnected = checkRowsForThreePiecesConnected(
+    const isRow = checkRowsForThreePiecesConnected(
         updatedCells,
         colorToCheck
     );
 
     // 2. Check columns for three pieces connected.
-    const isColumnThreePiecesConnected = !isRowThreePiecesConnected && checkColumnsForThreePiecesConnected(
+    const checkColumnsForThreePiecesConnected = checkColumnsForSequence(3);
+    const isColumn = !isRow && checkColumnsForThreePiecesConnected(
         updatedCells,
         colorToCheck
     );
 
     // 3. Check bottom-left to top-right diagonals for three pieces connected.
-    const isDiagonalTypeOneThreePiecesConnected = !isColumnThreePiecesConnected && checkDiagonalTypeOneThreePiecesConnected(
+    const isDiagonalTypeOne = !isColumn && checkDiagonalTypeOneThreePiecesConnected(
         updatedCells,
         colorToCheck
     );
 
     // 4. Check top-left to bottom-right diagonals for ThreePiecesConnected
-    const isDiagonalTypeTwoThreePiecesConnected = !isDiagonalTypeOneThreePiecesConnected && checkDiagonalTypeTwoThreePiecesConnected(
+    const isDiagonalTypeTwo = !isDiagonalTypeOne && checkDiagonalTypeTwoThreePiecesConnected(
         updatedCells,
         colorToCheck
     );
 
-    return isRowThreePiecesConnected || isColumnThreePiecesConnected || isDiagonalTypeOneThreePiecesConnected || isDiagonalTypeTwoThreePiecesConnected;
+    return isRow || isColumn || isDiagonalTypeOne || isDiagonalTypeTwo;
 };
