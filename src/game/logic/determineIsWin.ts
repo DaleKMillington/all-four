@@ -2,6 +2,7 @@
 import { CellColorsType } from "../../constants/cellColors.const";
 import { checkRowsForSequence } from "./sequence/checkRowsForSequence";
 import { checkColumnsForSequence } from "./sequence/checkColumnsForSequence";
+import { checkDiagonalTypeOneForSequence } from "./sequence/checkDiagonalTypeOneForSequence";
 
 // Declarations
 const determineHasWon = (
@@ -16,35 +17,6 @@ const determineHasWon = (
     const position3Match = colorToCheck === position3;
     const position4Match = colorToCheck === position4;
     return position1Match && position2Match && position3Match && position4Match;
-};
-
-const checkDiagonalTypeOneWin = (
-    updatedCells: CellColorsType[][],
-    colorToCheck: CellColorsType
-): boolean => {
-
-    for (let row = 3; row < updatedCells.length; row++) {
-        for (let col = 0; col < updatedCells[row].length - 3; col++) {
-            const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row - 1][col + 1];
-            const position3 = updatedCells[row - 2][col + 2];
-            const position4 = updatedCells[row - 3][col + 3];
-
-            const hasWon = determineHasWon(
-                position1,
-                position2,
-                position3,
-                position4,
-                colorToCheck
-            );
-
-            if (hasWon) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
 };
 
 const checkDiagonalTypeTwoWin = (
@@ -91,6 +63,7 @@ export const determineIsWin = (
     const isColumnWin = !isRowWin && checkColumnsForWin(updatedCells, colorToCheck);
 
     // 3. Check bottom-left to top-right diagonals for win
+    const checkDiagonalTypeOneWin = checkDiagonalTypeOneForSequence(4);
     const isDiagonalTypeOneWin = !isColumnWin && checkDiagonalTypeOneWin(updatedCells, colorToCheck);
 
     // 4. Check top-left to bottom-right diagonals for win

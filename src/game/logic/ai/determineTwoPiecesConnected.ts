@@ -8,6 +8,7 @@ Refactor / redesign this to remove redundancy!
 import { CellColorsType } from "../../../constants/cellColors.const";
 import { checkRowsForSequence } from "../sequence/checkRowsForSequence";
 import { checkColumnsForSequence } from "../sequence/checkColumnsForSequence";
+import { checkDiagonalTypeOneForSequence } from "../sequence/checkDiagonalTypeOneForSequence";
 
 // Declarations
 const determineHasTwoPiecesConnected = (
@@ -18,31 +19,6 @@ const determineHasTwoPiecesConnected = (
     const position1Match = colorToCheck === position1;
     const position2Match = colorToCheck === position2;
     return position1Match && position2Match;
-};
-
-const checkDiagonalTypeOneTwoPiecesConnected = (
-    updatedCells: CellColorsType[][],
-    colorToCheck: CellColorsType
-): boolean => {
-
-    for (let row = 1; row < updatedCells.length; row++) {
-        for (let col = 0; col < updatedCells[row].length - 1; col++) {
-            const position1 = updatedCells[row][col];
-            const position2 = updatedCells[row - 1][col + 1];
-
-            const isTwo = determineHasTwoPiecesConnected(
-                position1,
-                position2,
-                colorToCheck
-            );
-
-            if (isTwo) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
 };
 
 const checkDiagonalTypeTwoTwoPiecesConnected = (
@@ -91,6 +67,7 @@ export const determineTwoPiecesConnected = (
     );
 
     // 3. Check bottom-left to top-right diagonals for two pieces connected.
+    const checkDiagonalTypeOneTwoPiecesConnected = checkDiagonalTypeOneForSequence(2);
     const isDiagonalTypeOne = !isColumn && checkDiagonalTypeOneTwoPiecesConnected(
         updatedCells,
         colorToCheck
