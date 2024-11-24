@@ -1,10 +1,10 @@
 // Project
 import { CellColorsType } from "../../../constants/cellColors.const";
+import { checkForSequence } from "../sequence/checkForSequence";
 
 // Local
 import { determineAvailableColumns } from "./determineAvailableColumns";
 import { simulateDropCell } from "./simulateDropCell";
-import { determineIsWin } from "../determineIsWin";
 
 // Declarations
 export const determineHasTwoWinningMoves = (
@@ -20,7 +20,7 @@ export const determineHasTwoWinningMoves = (
     let winningMovesCount = 0;
     for (const colIndex of availableColumns) {
         const updatedSimulatedCells = simulateDropCell(simulatedCells, colIndex, colorToDrop);
-        const isSimulationAWin = determineIsWin(updatedSimulatedCells, colorToDrop);
+        const isSimulationAWin = checkForSequence(updatedSimulatedCells, colorToDrop, 4);
 
         if (isSimulationAWin) {
             winningMovesCount++;

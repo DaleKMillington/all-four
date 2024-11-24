@@ -1,9 +1,9 @@
 // Project
 import { CellColorsType } from "../../constants/cellColors.const";
 import { gamePhase, GamePhaseType } from "../../constants/gamePhase.const";
+import { checkForSequence } from "./sequence/checkForSequence";
 
 // Local
-import { determineIsWin } from "./determineIsWin";
 import { determineIsBoardFull } from "./determineIsBoardFull";
 
 // Declarations
@@ -13,7 +13,7 @@ export const determineUpdatedGamePhase = (
 ): GamePhaseType => {
 
     // 1. Has a 4-in-a-row connection been made?
-    const isWin = determineIsWin(updatedCells, colorToCheck);
+    const isWin = checkForSequence(updatedCells, colorToCheck, 4);
     if (isWin){
         return gamePhase.won;
     }

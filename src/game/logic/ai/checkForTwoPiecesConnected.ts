@@ -1,12 +1,12 @@
 // Project
 import { GameState } from "../../GameState";
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";
+import { checkForSequence } from "../sequence/checkForSequence";
 
 // Local
 import { determineColorToDrop } from "./determineColorToDrop";
 import { determineAvailableColumns } from "./determineAvailableColumns";
 import { simulateDropCell } from "./simulateDropCell";
-import { determineTwoPiecesConnected } from "./determineTwoPiecesConnected";
 
 // Declarations
 export const checkForTwoPiecesConnected = (
@@ -23,7 +23,7 @@ export const checkForTwoPiecesConnected = (
     // 3. Iterate over available columns and simulate making a move then check for two pieces connected.
     for (const colIndex of availableColumns) {
         const simulatedCells = simulateDropCell(gameState.cells, colIndex, colorToDrop);
-        const hasTwoPiecesConnected = determineTwoPiecesConnected(simulatedCells, colorToDrop);
+        const hasTwoPiecesConnected = checkForSequence(simulatedCells, colorToDrop, 2);
         if (hasTwoPiecesConnected) {
             handleMakeMoveWithDelay(colIndex);
             return true;

@@ -1,6 +1,6 @@
 // Project
 import { GameState } from "../../GameState";
-import { determineIsWin } from "../determineIsWin";
+import { checkForSequence } from "../sequence/checkForSequence";
 
 // Local
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";
@@ -24,7 +24,7 @@ export const checkForWinningMove = (
     // 3. Iterate over available columns and simulate making a move then check for a win.
     for (const colIndex of availableColumns) {
         const simulatedCells = simulateDropCell(gameState.cells, colIndex, colorToDrop);
-        const isSimulationAWin = determineIsWin(simulatedCells, colorToDrop);
+        const isSimulationAWin = checkForSequence(simulatedCells, colorToDrop, 4);
         if (isSimulationAWin) {
             handleMakeMoveWithDelay(colIndex);
             return true;

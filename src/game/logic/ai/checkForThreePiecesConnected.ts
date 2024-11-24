@@ -1,12 +1,12 @@
 // Project
 import { GameState } from "../../GameState";
 import { HandleMakeMoveWithDelayType } from "./handleAIMove";
+import { checkForSequence } from "../sequence/checkForSequence";
 
 // Local
 import { determineColorToDrop } from "./determineColorToDrop";
 import { determineAvailableColumns } from "./determineAvailableColumns";
 import { simulateDropCell } from "./simulateDropCell";
-import { determineThreePiecesConnected } from "./determineThreePiecesConnected";
 
 // Declarations
 export const checkForThreePiecesConnected = (
@@ -23,7 +23,7 @@ export const checkForThreePiecesConnected = (
     // 3. Iterate over available columns and simulate making a move then check for three pieces connected.
     for (const colIndex of availableColumns) {
         const simulatedCells = simulateDropCell(gameState.cells, colIndex, colorToDrop);
-        const hasThreePiecesConnected = determineThreePiecesConnected(simulatedCells, colorToDrop);
+        const hasThreePiecesConnected = checkForSequence(simulatedCells, colorToDrop, 3);
         if (hasThreePiecesConnected) {
             handleMakeMoveWithDelay(colIndex);
             return true;
